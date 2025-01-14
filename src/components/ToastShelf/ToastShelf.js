@@ -3,7 +3,13 @@ import React from 'react';
 import Toast from '../Toast';
 import styles from './ToastShelf.module.css';
 
-function ToastShelf({ toasts, onDismiss }) {
+function ToastShelf() {
+  const { toasts, setToasts } = React.useContext(ToastContext);
+
+  function onDismiss(id) {
+    setToasts(toasts.filter((toast) => toast.id !== id));
+  }
+
   return (
     <ol className={styles.wrapper}>
       {toasts.map((toast) => (
