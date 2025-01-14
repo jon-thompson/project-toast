@@ -15,7 +15,8 @@ function ToastPlayground() {
     setToasts(toasts.filter((toast) => toast.id !== id));
   }
 
-  function handleToastAddition() {
+  function handleSubmit(e) {
+    e.preventDefault();
     setToasts([...toasts, { id: crypto.randomUUID(), message, variant: selectedVariant }]);
     setMessage('');
     setSelectedVariant('notice');
@@ -30,7 +31,7 @@ function ToastPlayground() {
 
       <ToastShelf toasts={toasts} onDismiss={handleDismiss} />
 
-      <div className={styles.controlsWrapper}>
+      <form onSubmit={handleSubmit} className={styles.controlsWrapper}>
         <div className={styles.row}>
           <label
             htmlFor="message"
@@ -75,10 +76,10 @@ function ToastPlayground() {
           <div
             className={`${styles.inputWrapper} ${styles.radioWrapper}`}
           >
-            <Button onClick={handleToastAddition}>Pop Toast!</Button>
+            <Button>Pop Toast!</Button>
           </div>
         </div>
-      </div>
+      </form>
     </div>
   );
 }
